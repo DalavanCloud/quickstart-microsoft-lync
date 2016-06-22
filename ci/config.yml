@@ -17,9 +17,6 @@ global:
   cis3bucket:  s3://quickstart-ci-bucket
  
 tests:
-  quickstart-microsoft-lynct1:
-    template_file: quickstart-microsoft-lync-example1.template
-    parameter_input: quickstart-microsoft-lync-exampleparms1.json
-  quickstart-microsoft-lynct2:
-    template_file: quickstart-microsoft-lync-example2.template
-    parameter_input: quickstart-microsoft-lync-exampleparms2.json
+  master-template:
+    template_file: Lync_2013_Master.template
+    parameter_input: Lync_2013_Master.json
