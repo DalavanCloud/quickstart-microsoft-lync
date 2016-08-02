@@ -265,7 +265,7 @@
                                 "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Unzip-Archive.ps1"
                             },
                             "c:\\cfn\\downloads\\Silverlight_x64.exe": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/installers/Silverlight_x64.exe"
+                                "source": "http://go.microsoft.com/fwlink/?LinkID=229321"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
                                 "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/modules/AWSQuickStart.zip"
@@ -692,7 +692,7 @@
                                 "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Unzip-Archive.ps1"
                             },
                             "c:\\cfn\\downloads\\Silverlight_x64.exe": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/installers/Silverlight_x64.exe"
+                                "source": "http://go.microsoft.com/fwlink/?LinkID=229321"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
                                 "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/modules/AWSQuickStart.zip"
