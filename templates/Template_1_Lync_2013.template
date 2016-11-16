@@ -262,31 +262,31 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Unzip-Archive.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
                             },
                             "c:\\cfn\\downloads\\Silverlight_x64.exe": {
                                 "source": "http://go.microsoft.com/fwlink/?LinkID=229321"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/modules/AWSQuickStart.zip"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
                             },
                             "c:\\cfn\\scripts\\Join-Domain.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Join-Domain.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Join-Domain.ps1"
                             },
                             "c:\\cfn\\scripts\\Download-File.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Download-File.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1"
                             },
                             "c:\\cfn\\scripts\\Mount-DiskImage.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Mount-DiskImage.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1"
                             },
                             "c:\\cfn\\scripts\\Disable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Disable-AutoLogon.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Enable-AutoLogon.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Invoke-ADReplication.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Invoke-ADReplication.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Invoke-ADReplication.ps1"
                             },
                             "c:\\cfn\\scripts\\Topology.xml": {
                                 "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/scripts/Topology.xml"
@@ -689,31 +689,31 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Unzip-Archive.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
                             },
                             "c:\\cfn\\downloads\\Silverlight_x64.exe": {
                                 "source": "http://go.microsoft.com/fwlink/?LinkID=229321"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/modules/AWSQuickStart.zip"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
                             },
                             "c:\\cfn\\scripts\\Join-Domain.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Join-Domain.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Join-Domain.ps1"
                             },
                             "c:\\cfn\\scripts\\Download-File.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Download-File.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1"
                             },
                             "c:\\cfn\\scripts\\Mount-DiskImage.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Mount-DiskImage.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1"
                             },
                             "c:\\cfn\\scripts\\Disable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Disable-AutoLogon.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Enable-AutoLogon.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Invoke-ADReplication.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Invoke-ADReplication.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Invoke-ADReplication.ps1"
                             },
                             "c:\\cfn\\scripts\\Topology.xml": {
                                 "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/scripts/Topology.xml"
@@ -1346,22 +1346,22 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Unzip-Archive.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/modules/AWSQuickStart.zip"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
                             },
                             "c:\\cfn\\scripts\\Download-File.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Download-File.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1"
                             },
                             "c:\\cfn\\scripts\\Mount-DiskImage.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Mount-DiskImage.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1"
                             },
                             "c:\\cfn\\scripts\\Disable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Disable-AutoLogon.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Enable-AutoLogon.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1": {
                                 "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/exchange/latest/scripts/Set-PrimaryDnsSuffix.ps1"
@@ -1737,22 +1737,22 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Unzip-Archive.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/modules/AWSQuickStart.zip"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
                             },
                             "c:\\cfn\\scripts\\Download-File.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Download-File.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1"
                             },
                             "c:\\cfn\\scripts\\Mount-DiskImage.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Mount-DiskImage.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1"
                             },
                             "c:\\cfn\\scripts\\Disable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Disable-AutoLogon.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/utilities/latest/scripts/Enable-AutoLogon.ps1"
+                                "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1": {
                                 "source": "https://s3.amazonaws.com/quickstart-reference/microsoft/exchange/latest/scripts/Set-PrimaryDnsSuffix.ps1"
