@@ -200,7 +200,7 @@
         "ADStack": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://s3.amazonaws.com/quickstart-reference/microsoft/activedirectory/latest/templates/Template_1_AD_2012R2.template",
+                "TemplateURL": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-activedirectory/templates/Template_1_AD_2012R2.template",
                 "Parameters": {
                     "ADServer1InstanceType": {
                         "Ref": "ADInstanceType"
@@ -263,7 +263,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "DependsOn": "ADStack",
             "Properties": {
-                "TemplateURL": "https://s3.amazonaws.com/quickstart-reference/microsoft/lync/latest/templates/Template_1_Lync_2013.template",
+                "TemplateURL": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/templates/Template_1_Lync_2013.template",
                 "Parameters": {
                     "ADServer1PrivateIp": {
                         "Ref": "AD1PrivateIp"
