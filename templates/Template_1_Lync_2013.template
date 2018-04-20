@@ -1366,7 +1366,7 @@
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
                             },
-                            "c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1": {
+                            "c:\\cfn\\scripts\\Set-PrimaryDNSSuffix.ps1": {
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1"
                             },
                             "c:\\cfn\\scripts\\Set-LyncEdgeNetwork.ps1": {
@@ -1507,12 +1507,12 @@
                                 },
                                 "waitAfterCompletion": "forever"
                             },
-                            "b-execute-powershell-script-SetDnsSuffix": {
+                            "b-execute-powershell-script-SetDNSSuffix": {
                                 "command": {
                                     "Fn::Join": [
                                         "",
                                         [
-                                            "powershell.exe -command \"c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1 -Suffix '",
+                                            "powershell.exe -command \"c:\\cfn\\scripts\\Set-PrimaryDNSSuffix.ps1 -Suffix '",
                                             {
                                                 "Ref": "DomainDNSName"
                                             },
@@ -1757,7 +1757,7 @@
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
                             },
-                            "c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1": {
+                            "c:\\cfn\\scripts\\Set-PrimaryDNSSuffix.ps1": {
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1"
                             },
                             "c:\\cfn\\scripts\\Set-LyncEdgeNetwork.ps1": {
@@ -1889,12 +1889,12 @@
                                 },
                                 "waitAfterCompletion": "forever"
                             },
-                            "b-execute-powershell-script-SetDnsSuffix": {
+                            "b-execute-powershell-script-SetDNSSuffix": {
                                 "command": {
                                     "Fn::Join": [
                                         "",
                                         [
-                                            "powershell.exe -command \"c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1 -Suffix '",
+                                            "powershell.exe -command \"c:\\cfn\\scripts\\Set-PrimaryDNSSuffix.ps1 -Suffix '",
                                             {
                                                 "Ref": "DomainDNSName"
                                             },
