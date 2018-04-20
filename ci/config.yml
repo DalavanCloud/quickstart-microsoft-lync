@@ -2,6 +2,7 @@ global:
   marketplace-ami: false
   owner: quickstart-eng@amazon.com
   qsname: quickstart-microsoft-lync
+  regions:
   - ap-northeast-1
   - ap-northeast-2
   - ap-south-1
@@ -28,7 +29,6 @@ tests:
   withedge:
     parameter_input: Lync_2013_Master_with_Edge.json
     regions:
-    - sa-east-1
     - eu-west-1
     - us-east-1
     - us-east-2
