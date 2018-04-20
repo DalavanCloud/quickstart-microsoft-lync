@@ -489,7 +489,7 @@
                                     "Fn::Join": [
                                         "",
                                         [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command Install-WindowsFeature Web-Server, Web-Static-Content, Web-Default-Doc, Web-Http-Errors, Web-Asp-Net, Web-Net-Ext, Web-ISAPI-Ext, Web-ISAPI-Filter, Web-Http-Logging, Web-Log-Libraries, Web-Request-Monitor, Web-Http-Tracing, Web-Basic-Auth, Web-Windows-Auth, Web-Client-Auth, Web-Filtering, Web-Stat-Compression, Web-Dyn-Compression, NET-WCF-HTTP-Activation45, Web-Asp-Net45, Web-Mgmt-Tools, Web-Scripting-Tools, Web-Mgmt-Compat, Desktop-Experience, RSAT-ADDS, Windows-Identity-Foundation, telnet-client, BITS,RSAT-DNS-Server -Restart"
+                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command \"Install-WindowsFeature Web-Server, Web-Static-Content, Web-Default-Doc, Web-Http-Errors, Web-Asp-Net, Web-Net-Ext, Web-ISAPI-Ext, Web-ISAPI-Filter, Web-Http-Logging, Web-Log-Libraries, Web-Request-Monitor, Web-Http-Tracing, Web-Basic-Auth, Web-Windows-Auth, Web-Client-Auth, Web-Filtering, Web-Stat-Compression, Web-Dyn-Compression, NET-WCF-HTTP-Activation45, Web-Asp-Net45, Web-Mgmt-Tools, Web-Scripting-Tools, Web-Mgmt-Compat, Desktop-Experience, RSAT-ADDS, Windows-Identity-Foundation, telnet-client, BITS,RSAT-DNS-Server -Restart\""
                                         ]
                                     ]
                                 },
@@ -888,7 +888,7 @@
                                     "Fn::Join": [
                                         "",
                                         [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command Install-WindowsFeature Web-Server, Web-Static-Content, Web-Default-Doc, Web-Http-Errors, Web-Asp-Net, Web-Net-Ext, Web-ISAPI-Ext, Web-ISAPI-Filter, Web-Http-Logging, Web-Log-Libraries, Web-Request-Monitor, Web-Http-Tracing, Web-Basic-Auth, Web-Windows-Auth, Web-Client-Auth, Web-Filtering, Web-Stat-Compression, Web-Dyn-Compression, NET-WCF-HTTP-Activation45, Web-Asp-Net45, Web-Mgmt-Tools, Web-Scripting-Tools, Web-Mgmt-Compat, Desktop-Experience, RSAT-ADDS, Windows-Identity-Foundation, telnet-client, BITS,RSAT-DNS-Server -Restart"
+                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command \"Install-WindowsFeature Web-Server, Web-Static-Content, Web-Default-Doc, Web-Http-Errors, Web-Asp-Net, Web-Net-Ext, Web-ISAPI-Ext, Web-ISAPI-Filter, Web-Http-Logging, Web-Log-Libraries, Web-Request-Monitor, Web-Http-Tracing, Web-Basic-Auth, Web-Windows-Auth, Web-Client-Auth, Web-Filtering, Web-Stat-Compression, Web-Dyn-Compression, NET-WCF-HTTP-Activation45, Web-Asp-Net45, Web-Mgmt-Tools, Web-Scripting-Tools, Web-Mgmt-Compat, Desktop-Experience, RSAT-ADDS, Windows-Identity-Foundation, telnet-client, BITS,RSAT-DNS-Server -Restart\""
                                         ]
                                     ]
                                 },
@@ -1367,13 +1367,13 @@
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/microsoft/exchange/latest/scripts/Set-PrimaryDnsSuffix.ps1"
+                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1"
                             },
                             "c:\\cfn\\scripts\\Set-LyncEdgeNetwork.ps1": {
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/Set-LyncEdgeNetwork.ps1"
                             },
                             "c:\\cfn\\scripts\\Reset-LocalAdminPassword.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/microsoft/exchange/latest/scripts/Reset-LocalAdminPassword.ps1"
+                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Reset-LocalAdminPassword.ps1"
                             },
                             "c:\\cfn\\scripts\\New-LyncEdge.ps1": {
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/New-LyncEdge.ps1"
@@ -1527,7 +1527,7 @@
                                     "Fn::Join": [
                                         "",
                                         [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command Install-WindowsFeature NET-Framework-45-Core,Windows-Identity-Foundation"
+                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command \"Install-WindowsFeature NET-Framework-45-Core,Windows-Identity-Foundation\""
                                         ]
                                     ]
                                 },
@@ -1758,13 +1758,13 @@
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
                             },
                             "c:\\cfn\\scripts\\Set-PrimaryDnsSuffix.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/microsoft/exchange/latest/scripts/Set-PrimaryDnsSuffix.ps1"
+                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1"
                             },
                             "c:\\cfn\\scripts\\Set-LyncEdgeNetwork.ps1": {
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/Set-LyncEdgeNetwork.ps1"
                             },
                             "c:\\cfn\\scripts\\Reset-LocalAdminPassword.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/microsoft/exchange/latest/scripts/Reset-LocalAdminPassword.ps1"
+                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Reset-LocalAdminPassword.ps1"
                             },
                             "c:\\cfn\\scripts\\New-LyncEdge.ps1": {
                                 "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/New-LyncEdge.ps1"
@@ -1909,7 +1909,7 @@
                                     "Fn::Join": [
                                         "",
                                         [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command Install-WindowsFeature NET-Framework-45-Core,Windows-Identity-Foundation"
+                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command \"Install-WindowsFeature NET-Framework-45-Core,Windows-Identity-Foundation\""
                                         ]
                                     ]
                                 },
