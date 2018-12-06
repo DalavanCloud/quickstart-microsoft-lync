@@ -153,6 +153,10 @@
             "AllowedPattern": "^(?i)(s3|http|https):\\/\\/.+",
             "Description": "S3 URI to an S3 bucket containing the Lync Server 2013 Standard Edition installation media ISO image file (e.g., s3://sample-bucket/microsoft/lync/installation-media.iso). An HTTP/HTTPS URI can also be used (e.g., https://example.com/microsoft/lync/installation-media.iso)",
             "Type": "String"
+        },
+        "LatestAmiId": {
+            "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+            "Default": "/aws/service/ami-windows-latest/Windows_Server-2016-English-Full-Base"
         }
     },
     "Mappings": {
@@ -541,13 +545,7 @@
             },
             "Properties": {
                 "ImageId": {
-                    "Fn::FindInMap": [
-                        "AWSAMIRegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "WS2012R2"
-                    ]
+                    "Ref": "LatestAmiId"
                 },
                 "InstanceType": {
                     "Ref": "LyncFEInstanceType"
@@ -940,13 +938,7 @@
             },
             "Properties": {
                 "ImageId": {
-                    "Fn::FindInMap": [
-                        "AWSAMIRegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "WS2012R2"
-                    ]
+                    "Ref": "LatestAmiId"
                 },
                 "InstanceType": {
                     "Ref": "LyncFEInstanceType"
@@ -1610,13 +1602,7 @@
             },
             "Properties": {
                 "ImageId": {
-                    "Fn::FindInMap": [
-                        "AWSAMIRegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "WS2012R2"
-                    ]
+                    "Ref": "LatestAmiId"
                 },
                 "InstanceType": {
                     "Ref": "LyncEdgeInstanceType"
@@ -1992,13 +1978,7 @@
             },
             "Properties": {
                 "ImageId": {
-                    "Fn::FindInMap": [
-                        "AWSAMIRegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "WS2012R2"
-                    ]
+                    "Ref": "LatestAmiId"
                 },
                 "InstanceType": {
                     "Ref": "LyncEdgeInstanceType"
