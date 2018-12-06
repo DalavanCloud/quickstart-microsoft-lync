@@ -89,7 +89,7 @@
     },
     {
         "ParameterKey": "LyncISOImageURI",
-        "ParameterValue": "s3://quickstart-ci-media/microsoft/lync/2013/SfB-E-9319.0-enUS.ISO"
+        "ParameterValue": "s3://quickstart-ci-media/microsoft/sfb/2015/SfB-E-9319.0-enUS.ISO"
     },
     {
         "ParameterKey": "PrivSub1CIDR",
