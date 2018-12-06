@@ -190,6 +190,20 @@
             "Type": "String",
             "Default": "false"
         },
+        "QSS3BucketName": {
+            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
+            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
+            "Default": "aws-quickstart",
+            "Description": "S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
+            "Type": "String"
+        },
+        "QSS3KeyPrefix": {
+            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
+            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
+            "Default": "quickstart-microsoft-lync/",
+            "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
+            "Type": "String"
+        },
         "LyncISOImageURI": {
             "AllowedPattern": "^(?i)(s3|http|https):\\/\\/.+",
             "Description": "S3 URI to an S3 bucket containing the Lync Server 2013 Standard Edition installation media ISO image file (e.g., s3://sample-bucket/microsoft/lync/installation-media.iso). An HTTP/HTTPS URI can also be used (e.g., https://example.com/microsoft/lync/installation-media.iso)",
@@ -255,6 +269,12 @@
                     },
                     "VPCCIDR": {
                         "Ref": "VPCCIDR"
+                    },
+                    "QSS3BucketName": {
+                        "Ref": "QSS3BucketName"
+                    },
+                    "QSS3KeyPrefix": {
+                        "Ref": "QSS3KeyPrefix"
                     }
                 }
             }
@@ -357,6 +377,12 @@
                     },
                     "VPCCIDR": {
                         "Ref": "VPCCIDR"
+                    },
+                    "QSS3BucketName": {
+                        "Ref": "QSS3BucketName"
+                    },
+                    "QSS3KeyPrefix": {
+                        "Ref": "QSS3KeyPrefix"
                     },
                     "LyncISOImageURI": {
                         "Ref": "LyncISOImageURI"

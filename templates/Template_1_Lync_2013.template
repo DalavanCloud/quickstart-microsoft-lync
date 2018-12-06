@@ -149,6 +149,20 @@
             "Default": "10.0.0.0/16",
             "AllowedPattern": "[a-zA-Z0-9]+\\..+"
         },
+        "QSS3BucketName": {
+            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
+            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
+            "Default": "aws-quickstart",
+            "Description": "S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).",
+            "Type": "String"
+        },
+        "QSS3KeyPrefix": {
+            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
+            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
+            "Default": "quickstart-microsoft-lync/",
+            "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
+            "Type": "String"
+        },
         "LyncISOImageURI": {
             "AllowedPattern": "^(?i)(s3|http|https):\\/\\/.+",
             "Description": "S3 URI to an S3 bucket containing the Lync Server 2013 Standard Edition installation media ISO image file (e.g., s3://sample-bucket/microsoft/lync/installation-media.iso). An HTTP/HTTPS URI can also be used (e.g., https://example.com/microsoft/lync/installation-media.iso)",
@@ -210,12 +224,33 @@
                 },
                 "true"
             ]
+        },
+        "GovCloudCondition": {
+            "Fn::Equals": [
+                {
+                    "Ref": "AWS::Region"
+                },
+                "us-gov-west-1"
+            ]
         }
     },
     "Resources": {
         "FE1": {
             "Type": "AWS::EC2::Instance",
             "Metadata": {
+                "AWS::CloudFormation::Authentication": {
+                    "S3AccessCreds": {
+                        "type": "S3",
+                        "roleName": {
+                            "Ref": "FERole"
+                        },
+                        "buckets": [
+                            {
+                                "Ref": "QSS3BucketName"
+                            }
+                        ]
+                    }
+                },
                 "AWS::CloudFormation::Init": {
                     "configSets": {
                         "config": [
@@ -269,40 +304,194 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\downloads\\Silverlight_x64.exe": {
                                 "source": "http://go.microsoft.com/fwlink/?LinkID=229321"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Join-Domain.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Join-Domain.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Join-Domain.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Download-File.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Mount-DiskImage.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Disable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Invoke-ADReplication.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Invoke-ADReplication.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Invoke-ADReplication.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Topology.xml": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/Topology.xml"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/Topology.xml",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Topology-Edge.xml": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/Topology-Edge.xml"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/Topology-Edge.xml",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Install-Lync2013.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/Install-Lync2013.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/Install-Lync2013.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Install.bat": {
                                 "content": {
@@ -637,6 +826,19 @@
             "Type": "AWS::EC2::Instance",
             "DependsOn": "FE1",
             "Metadata": {
+                "AWS::CloudFormation::Authentication": {
+                    "S3AccessCreds": {
+                        "type": "S3",
+                        "roleName": {
+                            "Ref": "FERole"
+                        },
+                        "buckets": [
+                            {
+                                "Ref": "QSS3BucketName"
+                            }
+                        ]
+                    }
+                },
                 "AWS::CloudFormation::Init": {
                     "configSets": {
                         "config": [
@@ -690,37 +892,177 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\downloads\\Silverlight_x64.exe": {
                                 "source": "http://go.microsoft.com/fwlink/?LinkID=229321"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Join-Domain.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Join-Domain.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Join-Domain.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Download-File.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Mount-DiskImage.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Disable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Invoke-ADReplication.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Invoke-ADReplication.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Invoke-ADReplication.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Topology.xml": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/Topology.xml"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/Topology.xml",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Install-Lync2013.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/Install-Lync2013.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/Install-Lync2013.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Install.bat": {
                                 "content": {
@@ -1288,6 +1630,19 @@
             ],
             "Condition": "DeployEdge",
             "Metadata": {
+                "AWS::CloudFormation::Authentication": {
+                    "S3AccessCreds": {
+                        "type": "S3",
+                        "roleName": {
+                            "Ref": "LERole"
+                        },
+                        "buckets": [
+                            {
+                                "Ref": "QSS3BucketName"
+                            }
+                        ]
+                    }
+                },
                 "AWS::CloudFormation::Init": {
                     "configSets": {
                         "config": [
@@ -1341,34 +1696,174 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Download-File.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Mount-DiskImage.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Disable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Set-PrimaryDNSSuffix.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Set-LyncEdgeNetwork.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/Set-LyncEdgeNetwork.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/Set-LyncEdgeNetwork.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Reset-LocalAdminPassword.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Reset-LocalAdminPassword.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Reset-LocalAdminPassword.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\New-LyncEdge.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/New-LyncEdge.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/New-LyncEdge.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Install.bat": {
                                 "content": {
@@ -1673,6 +2168,19 @@
             ],
             "Condition": "DeployEdge",
             "Metadata": {
+                "AWS::CloudFormation::Authentication": {
+                    "S3AccessCreds": {
+                        "type": "S3",
+                        "roleName": {
+                            "Ref": "LERole"
+                        },
+                        "buckets": [
+                            {
+                                "Ref": "QSS3BucketName"
+                            }
+                        ]
+                    }
+                },
                 "AWS::CloudFormation::Init": {
                     "configSets": {
                         "config": [
@@ -1726,34 +2234,174 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\Unzip-Archive.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Unzip-Archive.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\modules\\AWSQuickStart.zip": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/modules/AWSQuickStart.zip",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Download-File.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Download-File.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Mount-DiskImage.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Mount-DiskImage.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Disable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Disable-AutoLogon.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Enable-AutoLogon.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Enable-AutoLogon.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Set-PrimaryDNSSuffix.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Set-PrimaryDNSSuffix.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Set-LyncEdgeNetwork.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/Set-LyncEdgeNetwork.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/Set-LyncEdgeNetwork.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Reset-LocalAdminPassword.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/submodules/quickstart-microsoft-utilities/scripts/Reset-LocalAdminPassword.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-microsoft-utilities/scripts/Reset-LocalAdminPassword.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\New-LyncEdge.ps1": {
-                                "source": "https://s3.amazonaws.com/aws-quickstart/quickstart-microsoft-lync/scripts/New-LyncEdge.ps1"
+                                "source": {
+                                    "Fn::Sub": [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/New-LyncEdge.ps1",
+                                        {
+                                            "QSS3Region": {
+                                                "Fn::If": [
+                                                    "GovCloudCondition",
+                                                    "s3-us-gov-west-1",
+                                                    "s3"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\Install.bat": {
                                 "content": {
@@ -2253,6 +2901,36 @@
                 "ManagedPolicyArns": [
                     "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
                 ],
+                "Policies": [
+                    {
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Action": [
+                                        "s3:GetObject"
+                                    ],
+                                    "Resource": {
+                                        "Fn::Sub": [
+                                            "arn:${Partition}:s3:::${QSS3BucketName}/${QSS3KeyPrefix}*",
+                                            {
+                                                "Partition": {
+                                                    "Fn::If": [
+                                                        "GovCloudCondition",
+                                                        "aws-us-gov",
+                                                        "aws"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "Effect": "Allow"
+                                }
+                            ]
+                        },
+                        "PolicyName": "aws-quick-start-s3-policy"
+                    }
+                ],
                 "Path": "/"
             }
         },
@@ -2288,6 +2966,36 @@
                 },
                 "ManagedPolicyArns": [
                     "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
+                ],
+                "Policies": [
+                    {
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Action": [
+                                        "s3:GetObject"
+                                    ],
+                                    "Resource": {
+                                        "Fn::Sub": [
+                                            "arn:${Partition}:s3:::${QSS3BucketName}/${QSS3KeyPrefix}*",
+                                            {
+                                                "Partition": {
+                                                    "Fn::If": [
+                                                        "GovCloudCondition",
+                                                        "aws-us-gov",
+                                                        "aws"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "Effect": "Allow"
+                                }
+                            ]
+                        },
+                        "PolicyName": "aws-quick-start-s3-policy"
+                    }
                 ],
                 "Path": "/"
             }
